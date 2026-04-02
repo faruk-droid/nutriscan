@@ -4,8 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  // 'base' harus di luar plugins, sebagai properti utama
-  base: '/nutriscan/',
+  // HAPUS BARIS BASE DI SINI (Jangan ada lagi '/nutriscan/')
 
   plugins: [
     react(),
