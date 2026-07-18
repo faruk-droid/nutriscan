@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Camera, ArrowLeft, Zap } from 'lucide-react';
+import { Camera, ArrowLeft } from 'lucide-react';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 export default function ScanScreen() {
   const navigate = useNavigate();
-  const [isScanning, setIsScanning] = useState(false);
+  const [isScanning, setIsScanning] = useState(false); 
   
   // Ambil data hewan yang dipilih
   const selectedAnimal = localStorage.getItem('selectedAnimal') || 'sapi';
@@ -17,12 +18,12 @@ export default function ScanScreen() {
     kelinci: 'Kelinci',
   };
 
-  const handleScan = () => {
-    setIsScanning(true);
-    // Simulasi proses scanning
+  const handleCardClick = () => {
+    setIsScanning(true); 
+    
     setTimeout(() => {
       navigate('/scan-result');
-    }, 2000);
+    }, 1000);
   };
 
   return (
@@ -63,46 +64,61 @@ export default function ScanScreen() {
 
               {/* Scanning Line */}
               {isScanning && (
-                <div className="absolute top-0 left-0 right-0 h-1 bg-green-400 shadow-lg shadow-green-500 animate-pulse"></div>
+                <div className="absolute top-0 left-0 right-0 h-1 bg-green-400 shadow-lg shadow-green-500 animate-bounce"></div>
               )}
             </div>
           </div>
 
-          {/* Camera Background Placeholder */}
-          <div className="w-full h-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 flex items-center justify-center">
-            <Camera className="w-32 h-32 text-white/10" strokeWidth={1} />
+          {/* FOTO TONGKOL JAGUNG SEBAGAI BACKGROUND KAMERA */}
+          <div className="w-full h-full relative">
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1758412047861-0e45c6be59fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3JuJTIwYWdyaWN1bHR1cmFsJTIwd2FzdGUlMjBsaXZlc3RvY2t8ZW58MXx8fHwxNzc1MDM5NjI4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+              alt="Tongkol Jagung Background"
+              className="w-full h-full object-cover"
+            />
+            {/* Overlay gelap tipis agar elemen UI di atas gambar (seperti label card) tetap kontras dan mudah dibaca */}
+            <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
           </div>
         </div>
       </div>
 
-      {/* Instructions */}
-      <div className="absolute top-1/4 left-0 right-0 z-10 text-center px-6">
-        <div className="bg-black/50 backdrop-blur-md rounded-2xl p-4 inline-block">
-          <p className="text-white text-lg">
-            {isScanning ? '🔍 Memindai limbah...' : '📸 Arahkan kamera ke limbah agroindustri'}
+      {/* INTERAKTIF LABEL CARD: Tongkol Jagung */}
+      <div
+        className="absolute z-20 cursor-pointer animate-in fade-in zoom-in duration-500"
+        style={{
+          left: '50%',
+          top: '55%',
+          transform: 'translate(-50%, -50%)',
+        }}
+        onClick={handleCardClick}
+      >
+        {/* Pointer Dot */}
+        <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50 mb-2 mx-auto"></div>
+
+        {/* Card Body */}
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl min-w-[180px] hover:scale-105 transition-all active:scale-95 text-center">
+          <h3 className="font-bold text-gray-800 mb-1 text-sm">
+            🌽 Tongkol Jagung
+          </h3>
+          <p className="text-[10px] text-green-600 font-semibold animate-pulse">
+            {isScanning ? 'Memindai...' : 'Klik untuk Scan'}
           </p>
         </div>
       </div>
 
-      {/* Scan Button */}
-      <div className="absolute bottom-12 left-0 right-0 z-20 flex justify-center px-6">
-        <button
-          onClick={handleScan}
-          disabled={isScanning}
-          className="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-2xl hover:shadow-green-500/50 transition-all hover:scale-110 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isScanning ? (
-            <Zap className="w-10 h-10 text-white animate-pulse" />
-          ) : (
-            <Camera className="w-10 h-10 text-white" strokeWidth={2.5} />
-          )}
-        </button>
+      {/* Instructions */}
+      <div className="absolute top-1/9 left-0 right-0 z-10 text-center px-6">
+        <div className="bg-black/50 backdrop-blur-md rounded-2xl p-4 inline-block">
+          <p className="text-white text-lg">
+            {isScanning ? 'Tunggu Sebentar...' : '📸 Sentuh objek untuk mulai memindai'}
+          </p>
+        </div>
       </div>
 
       {/* Bottom Info */}
-      <div className="absolute bottom-40 left-0 right-0 z-10 text-center">
+      <div className="absolute bottom-16 left-0 right-0 z-10 text-center">
         <p className="text-white/70 text-sm">
-          AI akan mengidentifikasi jenis limbah secara otomatis
+          Arahkan kamera ke limbah, lalu ketuk label yang muncul
         </p>
       </div>
     </div>

@@ -23,15 +23,8 @@ export default function Home() {
       title: 'Rekomendasi Pakan',
       subtitle: 'Komposisi pakan dari AI',
       icon: Lightbulb,
-      color: 'from-yellow-500 to-yellow-600',
+      color: 'from-yellow-400 to-yellow-500',
       path: '/recommendations',
-    },
-    {
-      title: 'AR Mode',
-      subtitle: 'Panduan dengan Augmented Reality',
-      icon: View,
-      color: 'from-blue-500 to-blue-600',
-      path: '/ar-mode',
     },
   ];
 
@@ -80,10 +73,7 @@ export default function Home() {
         })}
       </div>
 
-      {/* Footer */}
-      <div className="mt-10 text-center text-gray-500 text-xs">
-        <p>🌾 Powered by AI & AR Technology</p>
-      </div>
+      
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function SelectAnimal() {
     {
       id: 'domba',
       name: 'Domba',
-      emoji: '양',
+      emoji: '🐑',
       description: 'Pakan bernutrisi seimbang',
       color: 'from-blue-500 to-blue-600',
     },
@@ -53,7 +53,6 @@ export default function SelectAnimal() {
 
   const handleContinue = () => {
     if (selectedAnimal) {
-      // Simpan data hewan ke localStorage atau state management
       localStorage.setItem('selectedAnimal', selectedAnimal);
       navigate('/scan');
     }
@@ -77,23 +76,9 @@ export default function SelectAnimal() {
         </div>
       </div>
 
-      <div className="px-5 -mt-4">
-        {/* Info Box */}
-        <div className="bg-white rounded-2xl shadow-lg p-4 mb-5">
-          <div className="flex items-start">
-            <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
-              <span className="text-xl">🎯</span>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-800 mb-1 text-sm">Kenapa Pilih Hewan?</h3>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Setiap hewan ternak memiliki kebutuhan nutrisi yang berbeda. 
-                AI akan menyesuaikan rekomendasi pakan berdasarkan pilihan Anda.
-              </p>
-            </div>
-          </div>
-        </div>
-
+      {/* Bagian Konten (Margin disesuaikan menjadi pt-6 agar rapi setelah Info Box dihapus) */}
+      <div className="px-5 pt-6">
+        
         {/* Animal Grid */}
         <div className="grid grid-cols-2 gap-3 mb-5">
           {animals.map((animal) => (

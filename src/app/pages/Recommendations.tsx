@@ -36,7 +36,7 @@ export default function Recommendations() {
   return (
     <div className="min-h-full bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 pb-20">
       {/* Header */}
-      <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-5 py-6 rounded-b-3xl shadow-lg">
+      <div className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-5 py-6 rounded-b-3xl shadow-lg">
         <button
           onClick={() => navigate('/')}
           className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-3 hover:bg-white/30 transition-all"

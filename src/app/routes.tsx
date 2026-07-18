@@ -5,8 +5,9 @@ import ScanScreen from "./pages/ScanScreen";
 import ScanResult from "./pages/ScanResult";
 import Database from "./pages/Database";
 import Analytics from "./pages/Analytics";
-import ARMode from "./pages/ARMode";
 import Recommendations from "./pages/Recommendations";
+// 1. Ubah nama import menggunakan PascalCase (D besar) agar sinkron dengan di bawah
+import DatabaseDetail from "./pages/DatabaseDetail";
 
 export const router = createBrowserRouter([
   {
@@ -34,11 +35,12 @@ export const router = createBrowserRouter([
     Component: Analytics,
   },
   {
-    path: "/ar-mode",
-    Component: ARMode,
-  },
-  {
     path: "/recommendations",
     Component: Recommendations,
+  },
+  {
+    
+    path: "/database/:wasteId",
+    Component: DatabaseDetail, 
   },
 ]);

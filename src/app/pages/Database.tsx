@@ -24,7 +24,7 @@ export default function Database() {
       protein: '4.2%',
       fiber: '38.5%',
       imageUrl: 'https://images.unsplash.com/photo-1752253509855-e2dd7224184b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXJtaW5nJTIwZmllbGQlMjB3aGVhdCUyMHdhc3RlfGVufDF8fHx8MTc3NTAzOTYyOHww&ixlib=rb-4.1.0&q=80&w=1080',
-      color: 'from-green-500 to-green-600',
+      color: 'from-teal-500 to-cyan-500',
     },
     {
       id: 3,
@@ -41,7 +41,7 @@ export default function Database() {
       category: 'Kacang-kacangan',
       protein: '24.3%',
       fiber: '18.2%',
-      imageUrl: 'https://images.unsplash.com/photo-1758158286655-f0d93d86e174?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb3liZWFuJTIwYWdyaWN1bHR1cmUlMjBvcmdhbmljfGVufDF8fHx8MTc3NTAzOTYyOXww&ixlib=rb-4.1.0&q=80&w=1080',
+      imageUrl: 'https://images.unsplash.com/photo-1758158286655-f0d93d86e174?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb3liZWFuJTIwYWdyaWN1bHR1cmElMjBvcmdhbmljfGVufDF8fHx8MTc3NTAzOTYyOHww&ixlib=rb-4.1.0&q=80&w=1080',
       color: 'from-green-600 to-teal-600',
     },
     {
@@ -61,9 +61,9 @@ export default function Database() {
   );
 
   return (
-    <div className="min-h-full bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 pb-20">
+    <div className="min-h-full bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 pb-20"> 
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-5 py-6 rounded-b-3xl shadow-lg">
+      <div className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-5 py-6 rounded-b-3xl shadow-lg">
         <button
           onClick={() => navigate('/')}
           className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-3 hover:bg-white/30 transition-all"
@@ -95,7 +95,8 @@ export default function Database() {
             <div
               key={item.id}
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer"
-              onClick={() => navigate('/scan-result')}
+              // ✅ PERBAIKAN: Mengubah waste.id menjadi item.id agar sesuai dengan parameter rute baru
+              onClick={() => navigate(`/database/${item.id}`)}
             >
               <div className="flex">
                 {/* Image */}
