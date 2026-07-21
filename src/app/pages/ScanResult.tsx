@@ -7,6 +7,15 @@ export default function ScanResult() {
   
   // Ambil data hewan yang dipilih
   const selectedAnimal = localStorage.getItem('selectedAnimal') || 'sapi';
+  const selectedGoal = localStorage.getItem('selectedGoal') || 'hemat';
+
+const goalNames: Record<string, string> = {
+  hemat: 'Pakan Paling Hemat',
+  seimbang: 'Nutrisi Seimbang',
+  penggemukan: 'Penggemukan Cepat',
+  susu: 'Produksi Susu',
+  limbah: 'Maksimalkan Limbah',
+};
   const animalNames: Record<string, string> = {
     sapi: 'Sapi Pedaging',
     kambing: 'Kambing',
@@ -47,12 +56,11 @@ export default function ScanResult() {
           <CheckCircle className="w-7 h-7 mr-3" />
           <div>
             <h1 className="text-xl font-bold">Hasil Scan</h1>
-            <p className="text-green-100 text-xs">Identifikasi berhasil</p>
           </div>
         </div>
       </div>
 
-      <div className="px-5 -mt-5">
+      <div className="px-5 -mt-2">
         {/* Main Result Card */}
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-5">
           {/* Image */}
@@ -71,16 +79,75 @@ export default function ScanResult() {
             </div>
           </div>
 
-          {/* Info */}
-          <div className="p-5">
-            <h2 className="text-2xl font-bold text-gray-800 mb-1">
-              {scanData.name}
-            </h2>
-            <div className="flex items-center text-gray-600 mb-4">
-              <TrendingUp className="w-4 h-4 mr-2" />
-              <span className="text-xs">{scanData.specificType}</span>
-            </div>
+{/* Info */}
+<div className="p-5">
 
+  <h2 className="text-2xl font-bold text-gray-800 mb-2">
+    {scanData.name}
+  </h2>
+
+  {/* Jenis Limbah */}
+  <div className="flex items-center text-gray-600 mb-5">
+    <TrendingUp className="w-4 h-4 mr-2 text-green-600" />
+    <span className="text-sm font-medium">
+      {scanData.specificType}
+    </span>
+  </div>
+
+  {/* Card Rekomendasi */}
+  <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 mb-6">
+
+    <div className="flex items-center mb-4">
+      <div className="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center text-2xl mr-4">
+        🌽
+      </div>
+
+      <div>
+        <p className="text-xs text-gray-500">
+          Jenis Limbah
+        </p>
+
+        <h3 className="font-bold text-gray-800">
+          {scanData.specificType}
+        </h3>
+      </div>
+    </div>
+
+    <div className="border-t border-green-200 my-4"></div>
+
+    <div className="flex items-start">
+
+      <div className="text-3xl mr-3">
+        ✅
+      </div>
+
+      <div>
+
+        <h4 className="font-bold text-green-700 text-lg mb-3">
+          Direkomendasikan Untuk
+        </h4>
+
+        <div className="flex items-center mb-2">
+          <span className="mr-2 text-lg">🐄</span>
+          <span className="font-medium text-gray-700">
+            {animalNames[selectedAnimal]}
+          </span>
+        </div>
+
+        <div className="flex items-center">
+          <span className="mr-2 text-lg">🎯</span>
+          <span className="font-medium text-gray-700">
+            {goalNames[selectedGoal]}
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  {/* Nutrients */}
             {/* Nutrients */}
             <div className="space-y-3">
               <h3 className="font-bold text-gray-700 mb-3 text-sm">Kandungan Nutrisi:</h3>
@@ -105,30 +172,10 @@ export default function ScanResult() {
             </div>
           </div>
         </div>
-
-        {/* Alternatives */}
-        <div className="bg-white rounded-2xl shadow-lg p-4 mb-5">
-          <div className="flex items-center mb-3">
-            <AlertCircle className="w-4 h-4 text-orange-500 mr-2" />
-            <h3 className="font-bold text-gray-800 text-sm">Alternatif Lain</h3>
-          </div>
-          <div className="space-y-2">
-            {scanData.alternatives.map((alt, index) => (
-              <div
-                key={index}
-                className="flex justify-between items-center p-2.5 bg-gray-50 rounded-xl"
-              >
-                <span className="text-gray-700 text-xs">{alt.name}</span>
-                <span className="text-[10px] text-gray-500">{alt.confidence}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Action Buttons */}
         <div className="space-y-3">
           <button
-            onClick={() => navigate('/analytics')}
+            onClick={() => navigate('/ai-analysis')}
             className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all font-bold text-base hover:scale-105 active:scale-95"
           >
             📊 Hitung Nutrisi

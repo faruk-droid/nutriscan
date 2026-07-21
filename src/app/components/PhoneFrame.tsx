@@ -10,8 +10,7 @@ export function PhoneFrame({ children }: PhoneFrameProps) {
       {/* Phone Frame */}
       <div className="relative">
         {/* Phone Border - Hanya bingkai luar dan area layar */}
-        <div className="relative w-[380px] h-[800px] bg-white rounded-[3rem] shadow-2xl border-[14px] border-gray-800 overflow-hidden">
-          
+        <div className="relative w-[380px] h-[800px] bg-white rounded-[3rem] shadow-2xl border-[14px] border-gray-800 overflow-hidden">  
           {/* Screen Content */}
           <div className="w-full h-full overflow-hidden">
             <div className="w-full h-full overflow-y-auto scrollbar-hide">
@@ -23,7 +22,7 @@ export function PhoneFrame({ children }: PhoneFrameProps) {
 
         {/* Device Label */}
         <div className="absolute -bottom-8 left-0 right-0 text-center">
-          <p className="text-gray-500 text-sm font-medium">Screen Preview • 360 x 800</p>
+          <p className="text-gray-500 text-sm font-medium">Prototype Aplikasi Nutriscan</p>
         </div>
       </div>
     </div>

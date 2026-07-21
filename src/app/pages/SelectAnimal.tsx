@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { ArrowLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronRight, X } from 'lucide-react';
 
 export default function SelectAnimal() {
   const navigate = useNavigate();
   const [selectedAnimal, setSelectedAnimal] = useState<string | null>(null);
-
+  const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
+  const [showGoalModal, setShowGoalModal] = useState(false);
   const animals = [
     {
       id: 'sapi',
@@ -50,13 +51,55 @@ export default function SelectAnimal() {
       color: 'from-pink-500 to-rose-500',
     },
   ];
+  const goals = [
+  {
+    id: "hemat",
+    title: "💰 Pakan Paling Hemat",
+    description: "Biaya serendah mungkin dengan nutrisi tetap terpenuhi.",
+    animals: ["all"],
+  },
+  {
+    id: "seimbang",
+    title: "⚖️ Nutrisi Seimbang",
+    description: "Komposisi nutrisi sesuai kebutuhan ternak.",
+    animals: ["all"],
+  },
+  {
+    id: "penggemukan",
+    title: "🐄 Penggemukan Cepat",
+    description: "Mengoptimalkan protein dan energi.",
+    animals: ["all"],
+  },
+  {
+    id: "susu",
+    title: "🥛 Produksi Susu",
+    description: "Meningkatkan kualitas dan produksi susu.",
+    animals: ["sapi", "kambing", "domba"],
+  },
+  {
+    id: "limbah",
+    title: "🌿 Maksimalkan Limbah",
+    description: "Menggunakan limbah sebanyak mungkin secara aman.",
+    animals: ["all"],
+  },
+];
 
   const handleContinue = () => {
-    if (selectedAnimal) {
-      localStorage.setItem('selectedAnimal', selectedAnimal);
-      navigate('/scan');
+    if (selectedAnimal && selectedGoal) {
+
+        localStorage.setItem(
+            "selectedAnimal",
+            selectedAnimal
+        );
+
+        localStorage.setItem(
+            "selectedGoal",
+            selectedGoal
+        );
+
+        navigate("/scan");
     }
-  };
+};
 
   return (
     <div className="min-h-full bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 pb-20">
@@ -84,7 +127,10 @@ export default function SelectAnimal() {
           {animals.map((animal) => (
             <button
               key={animal.id}
-              onClick={() => setSelectedAnimal(animal.id)}
+              onClick={() => {
+    setSelectedAnimal(animal.id);
+    setShowGoalModal(true);
+}}
               className={`relative overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 ${
                 selectedAnimal === animal.id
                   ? 'ring-4 ring-green-500 shadow-2xl scale-105'
@@ -120,7 +166,7 @@ export default function SelectAnimal() {
         {/* Continue Button */}
         <button
           onClick={handleContinue}
-          disabled={!selectedAnimal}
+          disabled={!selectedAnimal || !selectedGoal}
           className={`w-full rounded-2xl p-5 shadow-lg font-bold text-base transition-all flex items-center justify-center ${
             selectedAnimal
               ? 'bg-gradient-to-r from-green-500 to-green-600 text-white hover:shadow-2xl hover:scale-105 active:scale-95'
@@ -138,17 +184,91 @@ export default function SelectAnimal() {
         </button>
 
         {/* Selected Info */}
-        {selectedAnimal && (
-          <div className="mt-3 p-3 bg-green-50 rounded-xl text-center animate-in fade-in zoom-in duration-300">
-            <p className="text-xs text-green-700">
-              ✅ Anda memilih:{' '}
-              <span className="font-bold">
-                {animals.find((a) => a.id === selectedAnimal)?.name}
-              </span>
-            </p>
-          </div>
-        )}
+{selectedAnimal && selectedGoal && (
+  <div className="mt-3 p-4 bg-green-50 rounded-xl animate-in fade-in zoom-in duration-300">
+    <p className="text-sm text-green-700">
+      🐄 Hewan:
+      <span className="font-bold ml-1">
+        {animals.find((a) => a.id === selectedAnimal)?.name}
+      </span>
+    </p>
+
+    <p className="text-sm text-green-700 mt-2">
+      🎯 Tujuan:
+      <span className="font-bold ml-1">
+        {goals.find((g) => g.id === selectedGoal)?.title}
+      </span>
+    </p>
+  </div>
+)}
+
+{/* ===== GOAL MODAL ===== */}
+{showGoalModal && (
+  <div className="absolute inset-0 bg-black/40 flex items-end z-50">
+    <div className="bg-white w-full rounded-t-3xl p-6 animate-in slide-in-from-bottom duration-300">
+
+      <div className="flex items-center justify-between mb-5">
+
+  <div>
+    <h2 className="text-xl font-bold">
+      🎯 Apa tujuan Anda?
+    </h2>
+
+    <p className="text-sm text-gray-500 mt-1">
+      Pilih tujuan formulasi pakan.
+    </p>
+  </div>
+
+  <button
+    onClick={() => {
+      setShowGoalModal(false);
+      setSelectedAnimal(null);
+    }}
+    className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition"
+  >
+    <X className="w-5 h-5 text-gray-600" />
+  </button>
+
+</div>
+
+      <div className="space-y-3">
+  {goals
+    .filter(
+      (goal) =>
+        goal.animals.includes("all") ||
+        goal.animals.includes(selectedAnimal ?? "")
+    )
+    .map((goal) => (
+      <button
+        key={goal.id}
+            onClick={() => {
+              setSelectedGoal(goal.id);
+
+              localStorage.setItem("selectedAnimal", selectedAnimal!);
+              localStorage.setItem("selectedGoal", goal.id);
+
+              navigate("/scan");
+            }}
+            className="w-full text-left p-4 rounded-2xl border hover:border-green-500 hover:bg-green-50 transition-all"
+          >
+            <div className="font-semibold">
+              {goal.title}
+            </div>
+
+            <div className="text-xs text-gray-500 mt-1">
+              {goal.description}
+            </div>
+          </button>
+        ))}
       </div>
+
     </div>
+  </div>
+)}
+
+</div>
+</div>
+
+    
   );
 }

@@ -6,9 +6,9 @@ import ScanResult from "./pages/ScanResult";
 import Database from "./pages/Database";
 import Analytics from "./pages/Analytics";
 import Recommendations from "./pages/Recommendations";
-// 1. Ubah nama import menggunakan PascalCase (D besar) agar sinkron dengan di bawah
 import DatabaseDetail from "./pages/DatabaseDetail";
-
+import FeedFormulation from "./pages/FeedFormulation";
+import AIAnalysisScreen from "./pages/AIAnalysisScreen";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -42,5 +42,13 @@ export const router = createBrowserRouter([
     
     path: "/database/:wasteId",
     Component: DatabaseDetail, 
+  },
+  {
+    path: "/feed-formulation",
+    Component: FeedFormulation,
+  },
+   {
+    path: "/ai-analysis",
+    Component: AIAnalysisScreen,
   },
 ]);

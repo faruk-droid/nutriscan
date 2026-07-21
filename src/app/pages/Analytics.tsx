@@ -161,7 +161,129 @@ export default function Analytics() {
             </p>
           </div>
         )}
+{/* ================= EVALUASI AI ================= */}
+{calculated && (
+  <div className="space-y-5 mt-5 animate-in fade-in duration-500">
 
+    {/* Evaluasi Nutrisi */}
+    <div className="bg-white rounded-2xl shadow-lg p-5">
+
+      <h2 className="font-bold text-lg mb-4">
+        📊 Evaluasi Nutrisi
+      </h2>
+
+      {[
+        {
+          name: "Protein",
+          status: parseFloat(calculated.protein) >= 15 ? "Sesuai Target" : "Kurang",
+          color:
+            parseFloat(calculated.protein) >= 15
+              ? "text-green-600"
+              : "text-red-500",
+        },
+        {
+          name: "Serat",
+          status:
+            parseFloat(calculated.fiber) <= 20
+              ? "Optimal"
+              : "Sedikit Tinggi",
+          color:
+            parseFloat(calculated.fiber) <= 20
+              ? "text-green-600"
+              : "text-yellow-500",
+        },
+        {
+          name: "Energi",
+          status:
+            calculated.energy >= 250
+              ? "Optimal"
+              : "Rendah",
+          color:
+            calculated.energy >= 250
+              ? "text-green-600"
+              : "text-red-500",
+        },
+        {
+          name: "Lemak",
+          status:
+            parseFloat(calculated.fat) >= 4
+              ? "Baik"
+              : "Rendah",
+          color:
+            parseFloat(calculated.fat) >= 4
+              ? "text-green-600"
+              : "text-yellow-500",
+        },
+      ].map((item) => (
+        <div
+          key={item.name}
+          className="flex justify-between items-center py-2 border-b last:border-0"
+        >
+          <span className="font-medium">
+            {item.name}
+          </span>
+
+          <span className={`font-bold ${item.color}`}>
+            {item.status}
+          </span>
+        </div>
+      ))}
+
+    </div>
+
+    {/* Estimasi Biaya */}
+    <div className="bg-white rounded-2xl shadow-lg p-5">
+
+      <h2 className="font-bold text-lg mb-4">
+        💰 Estimasi Produksi
+      </h2>
+
+      <div className="space-y-3">
+
+        <div className="flex justify-between">
+          <span>Total Berat</span>
+          <span className="font-bold">
+            {amount} gram
+          </span>
+        </div>
+
+        <div className="flex justify-between">
+          <span>Estimasi Biaya</span>
+          <span className="font-bold text-green-600">
+            Rp {Math.round(Number(amount) * 2.8).toLocaleString()}
+          </span>
+        </div>
+
+        <div className="flex justify-between">
+          <span>Harga / kg</span>
+          <span className="font-bold">
+            Rp 2.800
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* Insight AI */}
+    <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5">
+
+      <h2 className="font-bold text-blue-700 mb-3">
+        🧠 Insight AI
+      </h2>
+
+      <p className="text-sm text-gray-700 leading-relaxed">
+        Berdasarkan hasil perhitungan, formulasi pakan telah memenuhi
+        kebutuhan nutrisi utama untuk ternak. Kandungan protein dan energi
+        berada pada kategori optimal, sedangkan serat masih dalam batas aman.
+        Formulasi ini diperkirakan mampu mendukung pertumbuhan ternak dengan
+        biaya produksi yang relatif efisien.
+      </p>
+
+    </div>
+
+  </div>
+)}
         {/* Bottom Button */}
         <div className="mt-5">
           <button
