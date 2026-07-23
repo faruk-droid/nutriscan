@@ -23,7 +23,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: 1,
     role: 'ai',
     text:
-      'Halo! 👋 Saya NutriAI, asisten cerdas peternakan Anda. Saya bisa bantu jelasin hasil scan, kebutuhan nutrisi ternak, formulasi pakan, Pearson Square, Linear Programming, sampai fermentasi. Mau tanya apa hari ini?',
+      'Halo! 👋 Saya NutriScan Ai, asisten cerdas peternakan Anda. Saya bisa bantu jelasin hasil scan, kebutuhan nutrisi ternak, formulasi pakan, Pearson Square, Linear Programming, sampai fermentasi. Mau tanya apa hari ini?',
   },
 ];
  
@@ -167,7 +167,7 @@ export default function Recommendations() {
             <Sparkles className="w-3.5 h-3.5 absolute -top-1 -right-1 text-yellow-300" />
           </div>
           <div>
-            <h1 className="text-xl font-bold leading-tight">NutriAI</h1>
+            <h1 className="text-xl font-bold leading-tight">NutriScan AI</h1>
             <p className="text-teal-50 text-xs">Asisten Cerdas Peternakan</p>
           </div>
         </div>
