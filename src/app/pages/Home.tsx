@@ -1,3 +1,4 @@
+import logo from "./logo nutri.png";
 import { useNavigate } from 'react-router';
 import { Scan, Database, Lightbulb, View } from 'lucide-react';
 
@@ -32,10 +33,14 @@ export default function Home() {
     <div className="min-h-full bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 flex flex-col items-center justify-center p-6 pb-20">
       {/* Header */}
       <div className="text-center mb-10">
-        <div className="mb-5 flex justify-center">
-          <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center shadow-2xl">
-            <Scan className="w-10 h-10 text-white" strokeWidth={2.5} />
-          </div>
+        <div className="mb-1 flex justify-center">
+          <div className="w-50 h-50 flex items-center justify-center">
+  <img
+  src={logo}
+  alt="NutriScan Logo"
+   className="w-full h-full object-contain"
+/>
+</div>
         </div>
         <h1 className="text-4xl font-bold text-gray-800 mb-2">
           NutriScan

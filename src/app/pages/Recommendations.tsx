@@ -23,7 +23,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: 1,
     role: 'ai',
     text:
-      'Halo! 👋 Saya NutriScan Ai, asisten cerdas peternakan Anda. Saya bisa bantu jelasin hasil scan, kebutuhan nutrisi ternak, formulasi pakan, Pearson Square, Linear Programming, sampai fermentasi. Mau tanya apa hari ini?',
+      'Halo! 👋 Saya NutriScan AI, asisten cerdas peternakan Anda. Saya bisa bantu jelasin hasil scan, kebutuhan nutrisi ternak, formulasi pakan, Pearson Square, Linear Programming, sampai fermentasi. Mau tanya apa hari ini?',
   },
 ];
  
