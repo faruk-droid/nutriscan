@@ -20,7 +20,7 @@ export default function Home() {
       path: '/database',
     },
     {
-      title: 'Tanya Ai',
+      title: 'Tanya Chat Ai',
       subtitle: 'Bertanya Seputar Pakan Ternak dari AI',
       icon: Lightbulb,
       color: 'from-yellow-400 to-yellow-500',
